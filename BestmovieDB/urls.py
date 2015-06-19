@@ -18,4 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$','BestMovie.views.login'),
+    url(r'^inicio/$','BestMovie.views.inicio'),
+    url(r'^search_movie/$','BestMovie.views.search_movie'),
+    url(r'^$','BestMovie.views.index'),
 ]

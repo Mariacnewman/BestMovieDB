@@ -1,0 +1,6 @@
+.bkg_img {
+  background-image:url('../images/background.gif');
+  background-size:cover;
+  height:300px;
+  opacity: 2.5;
+}

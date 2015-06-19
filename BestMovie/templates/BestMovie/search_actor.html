@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/bootstrap-table/bootstrap-table.css">
+		<link rel="stylesheet" href="/static/css/generalstyle.css">
+		<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/bootstrap-table/bootstrap-table.js"></script>
+		<title>The Best Movie DataBase</title>
+	</head>
+	<body class="bkg_img">
+		<div class="container">
+			<div class="well">
+				<div class="text-center">
+				<h1>The Best Movie DataBase</h1>
+				</div>
+				<table class="table table-striped" data-toggle="table">			
+					<thead>
+						<tr>
+							<th data-visible="false">Actor Object</th>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Popularity</th>
+							<th>Known for</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for actor in actors %}
+							{% for item in actor.results %}
+								<tr>
+									<td data-visible="false">{{item}}</td>
+									<td>{{item.id}}</td>
+									<td>{{item.name}}</td>
+									<td>{{item.popularity}}</td>
+									<td>
+										<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#Modal{{item.id}}">
+										  Details
+										</button>
+										<div class="modal" id="Modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										  <div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+											  <div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Details for {{item.name}}</h4>
+											  </div>
+											  <div class="modal-body">
+												<div class="container-fluid table-bordered" >
+													<div class="row table-bordered">
+														<div class="col-md-2 table-bordered"><b>Media Type</b></div>
+														<div class="col-md-2 table-bordered"><b>Title</b></div>
+														<div class="col-md-2 table-bordered"><b>Date</b></div>
+														<div class="col-md-2 table-bordered"><b>Popularity</b></div>
+														<div class="col-md-4 table-bordered"><b>Overview</b></div>
+													</div>
+													{% for row in item.known_for %}
+														<div class="row table-bordered">
+														  <div class="col-md-2">{{row.media_type}}</div>
+														  <div class="col-md-2">{{row.title}}{{row.name}}</div>
+														  <div class="col-md-2">{{row.release_date}}{{row.first_air_date}}</div>
+														  <div class="col-md-2">{{row.popularity}}<</div>
+														  <div class="col-md-4">{{row.overview}}</div>
+														</div>
+													{% endfor %}
+												  </div>										
+											  </div>
+											  <div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>	
+											  </div>
+											</div>
+										  </div>
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						{% endfor%}
+					</tbody>
+				</table>
+				<p><a class="btn btn-info btn-md" href="../inicio/">Back</a></p>
+			</div>
+		</div>
+	</body>
+</html>
